@@ -41,6 +41,11 @@
       </div>
     </section>
 
+    <section id="examples-banner" class="examples-banner" hidden>
+      <span>You're looking at example applications. Edit one to keep it, or remove them all when you're ready to add your own.</span>
+      <button type="button" id="clear-examples" class="btn ghost">Remove examples</button>
+    </section>
+
     <section id="followups" class="followups" hidden></section>
 
     <section id="board" class="board"></section>
@@ -55,7 +60,10 @@
         <tbody id="table-body"></tbody>
       </table>
     </section>
-    <p id="empty" class="empty" hidden>No applications yet. Click <strong>+ Add application</strong> to get started.</p>
+    <section id="empty" class="empty" hidden>
+      <p id="empty-text"></p>
+      <button type="button" id="examples-btn" class="btn ghost">Load example applications</button>
+    </section>
   </main>
 
   <dialog id="app-dialog">
@@ -92,6 +100,8 @@
       </div>
     </form>
   </dialog>
+
+  <div id="toast" class="toast" role="status" hidden></div>
 
   <script src="app.js"></script>
 </body>

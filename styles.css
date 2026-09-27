@@ -21,6 +21,20 @@
   --s-withdrawn: #495057;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12151c;
+    --surface: #1b1f29;
+    --surface-2: #242a36;
+    --text: #e6e9ef;
+    --muted: #98a2b3;
+    --border: #2e3544;
+    --primary: #5c7cfa;
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    color-scheme: dark;
+  }
+}
+
 :root[data-theme="dark"] {
   --bg: #12151c;
   --surface: #1b1f29;
@@ -30,6 +44,7 @@
   --border: #2e3544;
   --primary: #5c7cfa;
   --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
@@ -50,7 +65,7 @@ body {
   background: var(--surface);
   border-bottom: 1px solid var(--border);
   position: sticky;
-  top: 0;
+  top: env(safe-area-inset-top, 0px);
   z-index: 5;
 }
 .topbar h1 { font-size: 1.2rem; margin: 0; }
@@ -125,7 +140,7 @@ input, select, textarea {
   font-size: 0.9rem;
 }
 .followups ul { margin: 6px 0 0; padding-left: 18px; }
-.followups a { color: var(--text); cursor: pointer; text-decoration: underline; }
+.link { font: inherit; color: var(--text); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
 .overdue { color: var(--danger); font-weight: 600; }
 
 /* Board */
@@ -192,6 +207,27 @@ tbody tr:hover { background: var(--surface-2); }
 td a { color: var(--primary); }
 
 .empty { text-align: center; color: var(--muted); padding: 40px 0; }
+.empty p { margin: 0 0 12px; }
+
+.examples-banner {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px;
+  background: var(--surface); border: 1px dashed var(--primary); border-radius: var(--radius);
+  padding: 10px 14px; margin-bottom: 14px; font-size: 0.9rem;
+}
+.example-tag {
+  margin-left: 6px; font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em;
+  color: var(--primary); border: 1px solid var(--primary); border-radius: 4px; padding: 0 5px; vertical-align: 2px;
+}
+
+.toast {
+  position: fixed; left: 50%; transform: translateX(-50%);
+  bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  max-width: calc(100vw - 32px);
+  background: var(--text); color: var(--bg);
+  padding: 10px 16px; border-radius: 8px; font-size: 0.9rem; box-shadow: var(--shadow); z-index: 20;
+}
+
+:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
 
 /* Dialog */
 dialog {
