@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Job Application Tracker</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>Job Tracker</h1>
+    <div class="topbar-actions">
+      <button id="theme-toggle" class="btn ghost" title="Toggle theme" aria-label="Toggle theme">◐</button>
+      <button id="add-btn" class="btn primary">+ Add application</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="stats" class="stats" aria-label="Summary"></section>
+
+    <section class="toolbar">
+      <input id="search" type="search" placeholder="Search company, role, location, notes…" aria-label="Search">
+      <select id="status-filter" aria-label="Filter by status">
+        <option value="">All statuses</option>
+      </select>
+      <select id="sort" aria-label="Sort">
+        <option value="dateApplied-desc">Newest applied</option>
+        <option value="dateApplied-asc">Oldest applied</option>
+        <option value="company-asc">Company A–Z</option>
+        <option value="followUp-asc">Follow-up soonest</option>
+        <option value="updatedAt-desc">Recently updated</option>
+      </select>
+      <div class="view-switch" role="tablist">
+        <button class="btn ghost active" data-view="board" role="tab">Board</button>
+        <button class="btn ghost" data-view="table" role="tab">Table</button>
+      </div>
+      <div class="data-actions">
+        <button id="export-csv" class="btn ghost">Export CSV</button>
+        <button id="export-json" class="btn ghost">Backup JSON</button>
+        <label class="btn ghost file-btn">Import JSON<input id="import-json" type="file" accept="application/json,.json" hidden></label>
+      </div>
+    </section>
+
+    <section id="followups" class="followups" hidden></section>
+
+    <section id="board" class="board"></section>
+    <section id="table-view" class="table-wrap" hidden>
+      <table>
+        <thead>
+          <tr>
+            <th>Company</th><th>Role</th><th>Status</th><th>Applied</th>
+            <th>Follow-up</th><th>Location</th><th>Salary</th><th></th>
+          </tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+      </table>
+    </section>
+    <p id="empty" class="empty" hidden>No applications yet. Click <strong>+ Add application</strong> to get started.</p>
+  </main>
+
+  <dialog id="app-dialog">
+    <form id="app-form" method="dialog">
+      <h2 id="dialog-title">Add application</h2>
+      <div class="grid">
+        <label>Company *<input name="company" required></label>
+        <label>Role *<input name="role" required></label>
+        <label>Status
+          <select name="status" id="status-select"></select>
+        </label>
+        <label>Date applied<input name="dateApplied" type="date"></label>
+        <label>Location<input name="location" placeholder="Remote, NYC…"></label>
+        <label>Salary / range<input name="salary" placeholder="$120k–140k"></label>
+        <label>Job posting URL<input name="url" type="url" placeholder="https://"></label>
+        <label>Source<input name="source" placeholder="LinkedIn, referral…"></label>
+        <label>Contact<input name="contact" placeholder="Name / email"></label>
+        <label>Next follow-up<input name="followUp" type="date"></label>
+        <label>Priority
+          <select name="priority">
+            <option value="">—</option>
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+          </select>
+        </label>
+        <label class="full">Notes<textarea name="notes" rows="4" placeholder="Interview details, questions to ask, etc."></textarea></label>
+      </div>
+      <div class="dialog-actions">
+        <button type="button" id="delete-btn" class="btn danger" hidden>Delete</button>
+        <span class="spacer"></span>
+        <button type="button" id="cancel-btn" class="btn ghost">Cancel</button>
+        <button type="submit" class="btn primary">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
